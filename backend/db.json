@@ -1,0 +1,71 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Arjun",
+      "email": "arjun@example.com"
+    },
+    {
+      "id": "2",
+      "name": "Meenu",
+      "email": "meenu@example.com"
+    },
+    {
+      "id": "U3EArOoUQuO7ZAaot76vK",
+      "fullName": "Arjun",
+      "email": "sehgalarjun25@gmail.com",
+      "password": "Richbrat123&",
+      "acceptTerms": true
+    },
+    {
+      "id": "f2e3",
+      "firstname": "arjun ",
+      "lastname": "sehgalll",
+      "email": "sehgalarjun25@gmail.com",
+      "password": "India123&",
+      "phone": "9896994786"
+    },
+    {
+      "id": "a4f1",
+      "firstname": "arjun ",
+      "lastname": "Arjun",
+      "email": "sehgalarjun255@gmail.com",
+      "password": "1234",
+      "phone": "09896994786"
+    },
+    {
+      "id": "723e",
+      "firstname": "arjun ",
+      "lastname": "Arjun",
+      "email": "sehgalarjun256@gmail.com",
+      "password": "123456",
+      "phone": "09896994786"
+    }
+  ],
+  "products": [
+    {
+      "id": "101",
+      "name": "Laptop",
+      "price": 60000
+    },
+    {
+      "id": "102",
+      "name": "Phone",
+      "price": 30000
+    }
+  ],
+  "cart": [
+    {
+      "userId": "1",
+      "productId": "101",
+      "quantity": 1,
+      "id": "c5cb"
+    },
+    {
+      "userId": "2",
+      "productId": "102",
+      "quantity": 2,
+      "id": "8768"
+    }
+  ]
+}
