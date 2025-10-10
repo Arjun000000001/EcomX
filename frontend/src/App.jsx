@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Mainroutes from "./routes/Mainroutes";
-import Nav from "./components/Nav";
 import { getCurrentUser } from "./store/actions/userActions";
+import { asyncLoadProducts } from "./store/actions/productActions"; // ✅ import product loader
+import Nav from "./components/Nav";
+import Mainroutes from "./routes/Mainroutes";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCurrentUser()); // App load hote hi current user Redux store me set
+    dispatch(getCurrentUser());
+    dispatch(asyncLoadProducts()); // ✅ products load on app start
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <Nav />
       <Mainroutes />
-    </div>
+    </>
   );
 };
 

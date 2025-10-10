@@ -1,7 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Nav = () => {
+  // Redux se user ko fetch kar rahe hain
+  // Agar user login nahi hai to null ya undefined hoga
+  const user = useSelector((state) => state.user.users);
+
+  // NavLink ke liye styling
   const navLinkClasses = ({ isActive }) =>
     isActive
       ? "text-blue-500 font-semibold border-b-2 border-blue-500 pb-1 transition-all"
@@ -18,23 +24,37 @@ const Nav = () => {
             </NavLink>
           </div>
 
-          {/* Desktop Menu */}
+          {/* Menu */}
           <div className="flex space-x-8 items-center">
             <NavLink to="/" className={navLinkClasses}>
               Home
             </NavLink>
+
             <NavLink to="/products" className={navLinkClasses}>
               Products
             </NavLink>
+
             <NavLink to="/about" className={navLinkClasses}>
               About
             </NavLink>
-            <NavLink
-              to="/login"
-              className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-1 rounded-md font-medium transition"
-            >
-              Login
-            </NavLink>
+
+            {user ? (
+              <>
+                <NavLink to="/admin/create-product" className={navLinkClasses}>
+                  Create Product
+                </NavLink>
+
+                {/* Optional: Logout button */}
+                {/* <button onClick={handleLogout} className="text-white bg-red-500 px-4 py-1 rounded-md">Logout</button> */}
+              </>
+            ) : (
+              <NavLink
+                to="/login"
+                className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-1 rounded-md font-medium transition"
+              >
+                Login
+              </NavLink>
+            )}
           </div>
         </div>
       </div>

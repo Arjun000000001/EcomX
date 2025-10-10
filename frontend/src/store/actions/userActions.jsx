@@ -54,15 +54,12 @@ export const logoutUser = () => (dispatch, getState) => {
   localStorage.removeItem("loggedInUser"); // localStorage clear
   console.log("User logged out successfully");
 };
-
-// ✅ Get Current Logged-in User and load into Redux store
 export const getCurrentUser = () => (dispatch) => {
   const user = localStorage.getItem("loggedInUser");
   if (user) {
-    dispatch(loadUsers([JSON.parse(user)])); // Redux store me sirf loadUser
-    console.log(JSON.parse(user)); // sirf data print
+    dispatch(loadUsers(JSON.parse(user))); // ✅ direct object
+    console.log("User loaded:", JSON.parse(user));
   } else {
-    console.log("No user is currently logged in");
-    dispatch(loadUsers([])); // Redux store me empty
+    dispatch(loadUsers(null)); // ✅ null if not logged in
   }
 };
