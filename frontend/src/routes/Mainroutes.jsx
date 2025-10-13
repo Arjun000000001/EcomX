@@ -5,6 +5,7 @@ import Products from "../pages/Products";   // ✅ Capital P
 import Login from "../pages/Login";
 import CreateProduct from "../admin/CreateProduct"
 import Register from "../pages/Register"
+import ProductDetails from "../admin/ProductDetails";
 const Mainroutes = () => {
   return (
     <Routes>

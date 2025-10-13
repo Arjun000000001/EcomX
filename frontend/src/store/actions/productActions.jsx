@@ -19,14 +19,12 @@ export const asyncLoadProducts = () => async (dispatch) => {
 // ✅ Create New Product & Reload Products
 export const asyncCreateProduct = (product) => async (dispatch) => {
   try {
-    const newProduct = { ...product, id: nanoid() }; // unique ID
+    const newProduct = { ...product, id: nanoid() };
     const response = await axios.post("/products", newProduct);
 
     if (response.status === 201 || response.status === 200) {
-      toast.success(" Product added successfully!");
+      toast.success("✅ Product added successfully!");
       console.log("Product created:", response.data);
-
-      // ✅ Minimal change: Reload all products after creation
       dispatch(asyncLoadProducts());
     } else {
       toast.error("❌ Failed to create product");
@@ -34,5 +32,25 @@ export const asyncCreateProduct = (product) => async (dispatch) => {
   } catch (error) {
     console.error("Create Product Error:", error);
     toast.error("❌ Something went wrong!");
+  }
+};
+
+// ✅ Update Existing Product (PATCH)
+export const asyncUpdateProduct = (id, updatedData) => async (dispatch) => {
+  try {
+    const response = await axios.patch(`/products/${id}`, updatedData);
+
+    if (response.status === 200) {
+      toast.success("✅ Product updated successfully!");
+      console.log("Product updated:", response.data);
+
+      // Reload products so UI updates
+      dispatch(asyncLoadProducts());
+    } else {
+      toast.error("❌ Failed to update product");
+    }
+  } catch (error) {
+    console.error("Update Product Error:", error);
+    toast.error("❌ Something went wrong while updating!");
   }
 };

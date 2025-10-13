@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncLoadProducts } from "../store/actions/productActions";
+import { Link } from "react-router-dom"; // ✅ Import Link
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -54,12 +55,23 @@ const Products = () => {
                 {p.stock > 0 ? `In Stock (${p.stock})` : "Out of Stock"}
               </p>
 
-              {/* UI Add to Cart */}
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition"
-              >
-                Add to Cart
-              </button>
+              {/* Buttons */}
+              <div className="flex gap-3 mt-4">
+                {/* Add to Cart Button (UI Only) */}
+                <button
+                  className="flex-1 bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition"
+                >
+                  Add to Cart
+                </button>
+
+                {/* More Info Button with Link */}
+                <Link
+                  to={`/product/${p.id}`}
+                  className="flex-1 text-center bg-gray-200 text-gray-800 py-2.5 rounded-lg font-medium hover:bg-gray-300 transition"
+                >
+                  More Info
+                </Link>
+              </div>
             </div>
           </div>
         ))
