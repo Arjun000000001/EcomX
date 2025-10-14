@@ -10,6 +10,7 @@ const Register = () => {
     email: "",
     password: "",
     phone: "",
+    isAdmin: false, // ✅ Added default key here
   });
 
   const dispatch = useDispatch();
@@ -22,7 +23,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(asyncRegisterUser(formData));
+      // ✅ Always send isAdmin: false in registration request
+      await dispatch(asyncRegisterUser({ ...formData, isAdmin: false }));
       alert("Registration successful!");
       navigate("/login");
     } catch (error) {

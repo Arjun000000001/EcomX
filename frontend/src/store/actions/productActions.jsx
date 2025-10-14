@@ -54,3 +54,22 @@ export const asyncUpdateProduct = (id, updatedData) => async (dispatch) => {
     toast.error("❌ Something went wrong while updating!");
   }
 };
+// ✅ Delete Product
+export const asyncDeleteProduct = (id) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`/products/${id}`);
+
+    if (response.status === 200 || response.status === 204) {
+      toast.success("✅ Product deleted successfully!");
+      console.log("Product deleted:", id);
+
+      // Reload products to update UI
+      dispatch(asyncLoadProducts());
+    } else {
+      toast.error("❌ Failed to delete product");
+    }
+  } catch (error) {
+    console.error("Delete Product Error:", error);
+    toast.error("❌ Something went wrong while deleting!");
+  }
+};

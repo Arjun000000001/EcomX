@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  users: null,
+  user: null, // single logged-in user
 };
 
 const userSlice = createSlice({
@@ -9,7 +9,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     loadUsers: (state, action) => {
-      state.users = action.payload;
+      state.user = action.payload; // direct object
     },
   },
 });
