@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { asyncLoginUser } from "../store/actions/userActions";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // ✅ Get user from Redux (if already logged in)
+  const currentUser = useSelector((state) => state.user.users);
 
   const {
     register,
@@ -15,7 +19,15 @@ const Login = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
+  // ✅ Redirect to /products if already logged in (even after refresh)
+  useEffect(() => {
+    const savedUser = localStorage.getItem("loggedInUser");
+    if (currentUser || savedUser) {
+      navigate("/products");
+    }
+  }, [currentUser, navigate]);
+
+  const onSubmit = async (data) => {
     const formData = {
       id: nanoid(),
       email: data.email,
@@ -23,11 +35,23 @@ const Login = () => {
       rememberMe: data.rememberMe || false,
     };
 
-    // ✅ Dispatch the login action
-    dispatch(asyncLoginUser(formData));
+    // ✅ Dispatch login action
+    const res = await dispatch(asyncLoginUser(formData));
+
+    // ✅ Navigate on success
+    if (res?.success) {
+      navigate("/products");
+    } else {
+      alert("Invalid email or password!");
+    }
 
     reset();
   };
+
+  // ✅ Hide login form if user is already logged in
+  if (currentUser || localStorage.getItem("loggedInUser")) {
+    return null;
+  }
 
   return (
     <div

@@ -9,10 +9,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     loadUsers: (state, action) => {
-      state.user = action.payload; // direct object
+      state.user = action.payload; // set user
+    },
+    removeUser: (state) => {
+      state.user = null; // clear user
     },
   },
 });
 
-export const { loadUsers } = userSlice.actions;
+export const { loadUsers, removeUser } = userSlice.actions;
 export default userSlice.reducer;
